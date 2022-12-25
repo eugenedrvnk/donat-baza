@@ -13,4 +13,8 @@ export abstract class SettingsService {
     clientId: string;
     clientSecret: string;
   }
+
+  abstract getPaymentsVars: () => {
+    merchantId: string;
+  }
 }

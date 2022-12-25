@@ -20,4 +20,8 @@ export class BaseSettingsService implements SettingsService {
     clientId: this.configService.get('TWITCH_CLIENT_ID')!,
     clientSecret: this.configService.get('TWITCH_CLIENT_SECRET')!,
   })
+
+  getPaymentsVars: SettingsService['getPaymentsVars'] = () => ({
+    merchantId: this.configService.get('PAYMENTS_MERCHANT_ID')!,
+  })
 }

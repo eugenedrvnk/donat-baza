@@ -33,11 +33,14 @@
     "axios": "^1.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "cloudipsp-node-js-sdk": "^1.0.5",
     "express-session": "^1.17.3",
     "joi": "^17.7.0",
+    "node-fetch": "^2.6.7",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "sha1": "^1.1.1",
     "socket.io": "^4.5.4"
   },
   "devDependencies": {
