@@ -9,8 +9,9 @@ import { LoggerModule } from './logger/logger.module';
 import { PaymentsController } from './payments/payments.controller';
 import { PaymentsModule } from './payments/payments.module';
 import { UtilsModule } from './utils/utils.module';
+import { DonationAlertWidgetModule } from './donation-alert-widget/donation-alert-widget.module';
 
 @Module({
-  imports: [AuthModule, SettingsModule, UsersModule, OauthProvidersModule, DonationModule, SocketModule, LoggerModule, PaymentsModule, UtilsModule],
+  imports: [AuthModule, SettingsModule, UsersModule, OauthProvidersModule, DonationModule, SocketModule, LoggerModule, PaymentsModule, UtilsModule, DonationAlertWidgetModule],
 })
 export class AppModule {}

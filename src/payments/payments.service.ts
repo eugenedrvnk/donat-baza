@@ -31,8 +31,8 @@ export class BasePaymentsService implements PaymentsService {
       order_desc: params.description,
       currency: params.currency,
       amount: params.amount,
-      response_url: "https://2468-93-74-97-118.eu.ngrok.io/payments/redirect",
-      server_callback_url: "https://2468-93-74-97-118.eu.ngrok.io/payments/console"
+      response_url: "https://731f-93-74-97-118.eu.ngrok.io/payments/redirect?query=test",
+      server_callback_url: "https://731f-93-74-97-118.eu.ngrok.io/payments/console"
     }
 
     const res = await this.fondyClient.Checkout(requestData);

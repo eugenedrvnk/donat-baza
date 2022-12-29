@@ -15,7 +15,7 @@ export class OauthProvidersService {
     return this.prisma.oauthProvider.create({ data });
   }
 
-  find = (query: FindOauthProdiverDto): Promise<OauthProviderEntity | null> => {
+  findFirst = (query: FindOauthProdiverDto): Promise<OauthProviderEntity | null> => {
     return this.prisma.oauthProvider.findFirst({
       where: query,
     })

@@ -9,31 +9,20 @@ export class PaymentsController {
     private readonly paymentsService: PaymentsService,
   ) { }
 
-  @Post('redirect')
-  redirect(@Body() body) {
-    return body;
-  }
-
-  @Post('console')
-  console(@Body() body) {
-    console.log('console', body);
-    return 'console'
-  }
-
-  @Get()
-  async create(
-    // @Query() dto: CreatePaymentDto,
+  @Get('init')
+  async init(
+    @Query() dto: CreatePaymentDto,
     @Res() res: Response,
   ) {
     res.redirect(await this.paymentsService.getRedirectUrl({
-      amount: 125,
+       amount: 125,
       currency: 'USD',
       description: 'description'
     }))
-    // res.redirect(await this.paymentsService.getRedirectUrl({
-    //   amount: 125,
-    //   currency: 'USD',
-    //   description: 'description'
-    // }));
+  }
+
+  @Post('fondy-callback')
+  redirect(@Body() body) {
+    return body;
   }
 }

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsInt, IsString } from "class-validator";
+import { IsIn, IsInt, IsString } from "class-validator";
 
 export class CreatePaymentDto {
   @IsInt()
@@ -14,4 +14,7 @@ export class CreatePaymentDto {
   
   @IsString()
   redirectUrl: string;
+
+  @IsIn(['FONDY'])
+  provider: 'FONDY'
 }
