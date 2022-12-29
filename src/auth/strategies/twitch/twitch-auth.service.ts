@@ -51,7 +51,7 @@ export class TwitchAuthService {
   public authenticate = async (code: string): Promise<UserEntity> => {
     const { accessToken, refreshToken, profile } = await this.getDataByOauthCode(code);
     console.log(profile);
-    const user = await this.usersService.findOne({ oauthProviders: { profileId: profile.id } });
+    const user = await this.usersService.findFirst({ oauthProviders: { profileId: profile.id } });
     console.log(user);
     if (user) return user;
 
@@ -59,7 +59,7 @@ export class TwitchAuthService {
       accessToken,
       refreshToken,
       oauthProviderProfileId: profile.id,
-      type: 'TWITCH'
+      type: 'twitch'
     })
   }
 
@@ -70,7 +70,7 @@ export class TwitchAuthService {
       accessToken,
       refreshToken,
       profileId: profile.id,
-      type: 'TWITCH',
+      type: 'twitch',
       userId,
     })
   };

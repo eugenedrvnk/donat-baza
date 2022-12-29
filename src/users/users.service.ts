@@ -7,7 +7,6 @@ import { FindOneUserDto } from './dto/find-user.dto';
 import { CreateUserViaOuathDto } from './dto/create-user.dto';
 import * as crypto from "crypto";
 
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -16,9 +15,8 @@ export class UsersService {
   ) { }
 
 
-  async findOne(query: FindOneUserDto): Promise<UserEntity | null> {
+  async findFirst(query: FindOneUserDto): Promise<UserEntity | null> {
     const { oauthProviders, ...baseQuery } = query;
-    console.log(query);
     return this.prisma.user.findFirst({
       where: {
         ...baseQuery,
@@ -34,7 +32,7 @@ export class UsersService {
     oauthProviderProfileId,
     type
   }: CreateUserViaOuathDto): Promise<UserEntity> { 
-    const wasOauthProviderAlreadyUsed = Boolean(await this.OauthProvidersService.find({
+    const wasOauthProviderAlreadyUsed = Boolean(await this.OauthProvidersService.findFirst({
       profileId: oauthProviderProfileId,
     }))
 

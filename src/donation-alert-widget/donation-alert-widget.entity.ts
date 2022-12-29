@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/common/base.entity";
+import { BaseEntity } from "src/database/base.entity";
 
 class DonationALertWidgetEntity extends BaseEntity {
     text: string;
