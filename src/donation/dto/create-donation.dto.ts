@@ -1,30 +1,23 @@
-import { Prisma } from "@prisma/client";
-import { Type } from "class-transformer";
-import { IsIn, IsInt, IsJSON, IsNumber, IsObject, IsString } from "class-validator";
-
-type Test = Record<string, string>;
+import { IsIn, IsInt, IsString } from "class-validator";
+import { IsJsonable } from "src/common/class-validator/json-validation";
+import { JSONValue } from "src/common/types";
 
 export class CreateDonationDto {
-  // @IsString()
-  // currency: string;
+  @IsString()
+  currency: string;
 
-  // @IsInt()
-  // @Type(() => Number)
-  // amount: number;
+  @IsInt()
+  amount: number;
 
-  // @IsString()
-  // senderName: string;
+  @IsString()
+  senderName: string;
 
-  // @IsIn(['fondy', 'manual'])
-  // paymentSystem: 'fondy' | 'manual'
+  @IsIn(['fondy', 'manual'])
+  paymentSystem: 'fondy' | 'manual'
 
-  // @IsIn(['progress', 'success', 'fail'])
-  // paymentStatus: 'progress' | 'success' | 'fail'
+  @IsIn(['progress', 'success', 'fail'])
+  paymentStatus: 'progress' | 'success' | 'fail'
 
-  @IsJSON()
-  // @Type(() => Test)
-  paymentData: Test;
-
-  // @IsInt()
-  // recipientId: number;
+  @IsJsonable()
+  paymentData: JSONValue;
 }

@@ -10,12 +10,10 @@ export class DonationController {
 
   @Post('')
   create(
-    @Query() query,
-    @Body() body,
+    @Body() body: CreateDonationDto,
   ) {
     console.log("body", body);
-    console.log("query", query);
-    return { query, body };
+    return { body };
   }
 
   @Get('success-payment')

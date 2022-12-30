@@ -67,7 +67,7 @@ model Donation {
   senderName    String
   paymentSystem PaymentSystem
   paymentStatus PaymentStatus
-  paymentData   Json
+  paymentData   Json?
 
   recipient   User @relation(fields: [recipientId], references: [id])
   recipientId Int
