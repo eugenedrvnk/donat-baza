@@ -1,12 +1,12 @@
-import { IsIn, IsInt, IsString } from "class-validator";
-import { IsJsonable } from "src/common/class-validator/json-validation";
-import { JSONValue } from "src/common/types";
+import { Type } from "class-transformer";
+import { IsIn, IsInt, IsNumber, IsString } from "class-validator";
 
 export class CreateDonationDto {
   @IsString()
   currency: string;
 
   @IsInt()
+  @Type(() => Number)
   amount: number;
 
   @IsString()
@@ -18,6 +18,10 @@ export class CreateDonationDto {
   @IsIn(['progress', 'success', 'fail'])
   paymentStatus: 'progress' | 'success' | 'fail'
 
-  @IsJsonable()
-  paymentData: JSONValue;
+  @IsString()
+  paymentData?: string;
+
+  @IsInt()
+  recipientId: number;
 }
+

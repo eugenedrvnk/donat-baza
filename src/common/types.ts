@@ -1,14 +1,13 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client"
 
-export type JSONValue =
-    | string
-    | number
-    | boolean
-    | Prisma.JsonObject
-    | Prisma.JsonArray;
-
-type JSONObject = {
-    [x: string]: JSONValue;
+type JsonObject2 = {
+    readonly [x: string]: JsonValue;
 }
 
-type JSONArray = Array<JSONValue>;
+export type JsonObject = { [Key in string]?: JsonValue | null }
+
+
+// type JsonArray = ReadonlyArray<JsonValue>;
+interface JsonArray extends ReadonlyArray<JsonValue | null> {}
+
+export type JsonValue = string | number | boolean | Prisma.JsonObject | JsonArray

@@ -11,7 +11,6 @@ export class DonationService {
   ) { }
 
   async create(data: CreateDonationDto & {recipientId: number}): Promise<DonationEntity> {
-    console.log("DATA", data);
     return this.prisma.donation.create({ data: {...data} });
   }
 }
