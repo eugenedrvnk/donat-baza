@@ -1,6 +1,6 @@
 include .env
 
-ifeq ($(ENV),DEV)
+ifeq ($(ENV),development)
     compose_file_path := docker/dev/docker-compose.yml
 else
     compose_file_path := docker/prod/docker-compose.yml

@@ -10,6 +10,16 @@ import { UtilsModule } from './utils/utils.module';
 import { DonationAlertWidgetModule } from './donation-alert-widget/donation-alert-widget.module';
 
 @Module({
-  imports: [AuthModule, SettingsModule, UsersModule, OauthProvidersModule, DonationModule, SocketModule, LoggerModule, UtilsModule, DonationAlertWidgetModule],
+  imports: [
+    AuthModule,
+    SettingsModule,
+    UsersModule,
+    OauthProvidersModule,
+    DonationModule,
+    SocketModule,
+    LoggerModule,
+    UtilsModule,
+    DonationAlertWidgetModule
+  ],
 })
-export class AppModule {}
+export class AppModule { }

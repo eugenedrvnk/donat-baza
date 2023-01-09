@@ -5,14 +5,15 @@ import * as crypto from 'crypto';
 
 import { SettingsService } from 'src/settings/settings.types';
 import { UrlUtils } from 'src/utils/url.types';
-import { CreateDonationDto } from './dto/create-donation.dto';
 
-const fondy = new Fondy(
-  {
-    merchantId: 1396424,
-    secretKey: 'test'
-  }
-)
+type GetRedirectUrl = (params: {
+  amount: number;
+  currency: string;
+  message: string;
+  recipientId: number;
+  senderName: string;
+  callbackUrlPath: string;
+}) => Promise<string>;
 
 @Injectable()
 export class FondyPaymentsService {
@@ -26,14 +27,27 @@ export class FondyPaymentsService {
     secretKey: 'test'
   })
 
-  //@ts-ignore
-  getRedirectUrl = async (params: Pick<CreateDonationDto, 'amount' | 'currency'>): Promise<string> => {
+  getRedirectUrl: GetRedirectUrl = async (
+    {
+      amount,
+      currency,
+      message,
+      recipientId,
+      senderName,
+      callbackUrlPath,
+    }) => {
     const requestData = {
       order_id: crypto.randomBytes(64).toString('hex'),
-      currency: params.currency,
-      amount: params.amount,
-      response_url: "https://731f-93-74-97-118.eu.ngrok.io/payments/redirect?query=test",
-      server_callback_url: "https://731f-93-74-97-118.eu.ngrok.io/payments/console"
+      order_desc: message,
+      currency,
+      amount,
+      response_url: this.urlUtils.buildUrl({
+        url: `${this.settingsService.backAppUrl}/${callbackUrlPath}`,
+        query: {
+          recipientId,
+          senderName,
+        }
+      }),
     }
 
     const res = await this.fondyClient.Checkout(requestData);

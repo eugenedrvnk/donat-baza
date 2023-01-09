@@ -1,7 +1,7 @@
 import * as Joi from "joi";
 
 export const validationSchema =  Joi.object({
-  ENV: Joi.string().valid('DEV', 'PROD'),
+  ENV: Joi.string().valid('production', 'development'),
 
   BACK_APP_URL: Joi.string().required(),
   FRONT_APP_URL: Joi.string().required(),
@@ -12,5 +12,5 @@ export const validationSchema =  Joi.object({
   TWITCH_CLIENT_ID: Joi.string().required(),
   TWITCH_CLIENT_SECRET: Joi.string().required(),
   
-  PAYMENTS_MERCHANT_ID: Joi.string().required(),
+  FONDY_MERCHANT_ID: Joi.string().required(),
 })

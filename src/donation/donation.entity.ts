@@ -5,7 +5,8 @@ export class DonationEntity extends BaseEntity {
   currency: string;
   amount: number;
   senderName: string;
+  message: string;
   paymentSystem: 'fondy' | 'manual';
-  paymentStatus: 'progress' | 'success' | 'fail';
+  paymentStatus: 'idle' | 'progress' | 'success' | 'fail';
   paymentData: JsonValue | null;
 }

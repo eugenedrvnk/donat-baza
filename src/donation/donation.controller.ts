@@ -1,19 +1,31 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Controller, Get, Post, Query, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { SocketService } from 'src/socket/socket.service';
 import { CreateDonationDto } from './dto/create-donation.dto';
+import { FondyPaymentsService } from './fondy-payments.service';
 
 @Controller('donations')
 export class DonationController {
   constructor(
     private readonly socketService: SocketService,
+    private readonly fondyPaymentsService: FondyPaymentsService,
   ) { }
 
-  @Post('')
-  create(
-    @Body() body: CreateDonationDto,
+  @Get('init')
+  async create(
+    @Query() dto: CreateDonationDto,
+    @Res() res: Response,
   ) {
-    console.log("body", body);
-    return { body };
+    res.redirect(await this.fondyPaymentsService.getRedirectUrl({
+      ...dto,
+      callbackUrlPath: 'donations/callback'
+    }));
+  }
+
+  @Post('callback')
+  async callback(data) {
+     console.log(data);
+    return 'callback'
   }
 
   @Get('success-payment')

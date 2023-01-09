@@ -8,8 +8,8 @@ import { IncorrectCallbackUrlError } from './twitch-auth.errors';
 
 @Injectable()
 export class TwitchAuthService {
-  private twitchId = this.settingsService.getTwitchVars().clientId;
-  private twitchSecret = this.settingsService.getTwitchVars().clientSecret;
+  twitchId = this.settingsService.twitchClientId;
+  twitchSecret = this.settingsService.twitchClientSecret;
 
   constructor(
     private settingsService: SettingsService,
@@ -47,7 +47,7 @@ export class TwitchAuthService {
     }
   }
 
-  
+
   public authenticate = async (code: string): Promise<UserEntity> => {
     const { accessToken, refreshToken, profile } = await this.getDataByOauthCode(code);
     console.log(profile);
@@ -108,6 +108,6 @@ export class TwitchAuthService {
 
 
   private getRedirectUrl = () => {
-    return `${this.settingsService.getBackAppUrl()}/auth/twitch/callback`;
+    return `${this.settingsService.backAppUrl}/auth/twitch/callback`;
   }
 }

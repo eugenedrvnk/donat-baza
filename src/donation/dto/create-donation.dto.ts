@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsIn, IsInt, IsNumber, IsString } from "class-validator";
+import { IsInt, IsString } from "class-validator";
 
 export class CreateDonationDto {
   @IsString()
@@ -12,16 +12,11 @@ export class CreateDonationDto {
   @IsString()
   senderName: string;
 
-  @IsIn(['fondy', 'manual'])
-  paymentSystem: 'fondy' | 'manual'
-
-  @IsIn(['progress', 'success', 'fail'])
-  paymentStatus: 'progress' | 'success' | 'fail'
-
   @IsString()
-  paymentData?: string;
+  message: string;
 
   @IsInt()
+  @Type(() => Number)
   recipientId: number;
 }
 

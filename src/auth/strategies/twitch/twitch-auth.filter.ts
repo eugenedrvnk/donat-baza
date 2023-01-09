@@ -17,7 +17,7 @@ export class TwitchAuthExceptionsFilter implements ExceptionFilter {
     const res = host.switchToHttp().getResponse();
     if (res.statusCode !== 302) {
       res.redirect(
-        this.settingsService.getFrontAppUrl() +
+        this.settingsService.frontAppUrl +
         '?failure=true');
     }
     this.loggerService.error(exception);
