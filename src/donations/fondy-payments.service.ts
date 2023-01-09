@@ -5,6 +5,7 @@ import * as crypto from 'crypto';
 
 import { SettingsService } from 'src/settings/settings.types';
 import { UrlUtils } from 'src/utils/url.types';
+import { DonationsService } from './donations.service';
 
 type GetRedirectUrl = (params: {
   amount: number;
@@ -20,6 +21,7 @@ export class FondyPaymentsService {
   constructor(
     private readonly settingsService: SettingsService,
     private readonly urlUtils: UrlUtils,
+    private readonly donationsService: DonationsService,
   ) { }
 
   private readonly fondyClient = new Fondy({
@@ -36,7 +38,16 @@ export class FondyPaymentsService {
       senderName,
       callbackUrlPath,
     }) => {
-    const requestData = {
+      const donation = this.donationsService.create({
+        amount,
+        currency,
+        message,
+        recipientId,
+        senderName,
+        paymentSystem: 'fondy',
+      })
+    
+      const requestData = {
       order_id: crypto.randomBytes(64).toString('hex'),
       order_desc: message,
       currency,

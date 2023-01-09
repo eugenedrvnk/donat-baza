@@ -3,7 +3,7 @@ import { AuthModule } from './auth/auth.module';
 import { SettingsModule } from './settings/settings.module';
 import { UsersModule } from './users/users.module';
 import { OauthProvidersModule } from './oauth-providers/oauth-providers.module';
-import { DonationModule } from './donation/donation.module';
+import { DonationsModule } from './donations/donations.module';
 import { SocketModule } from './socket/socket.module';
 import { LoggerModule } from './logger/logger.module';
 import { UtilsModule } from './utils/utils.module';
@@ -15,7 +15,7 @@ import { DonationAlertWidgetModule } from './donation-alert-widget/donation-aler
     SettingsModule,
     UsersModule,
     OauthProvidersModule,
-    DonationModule,
+    DonationsModule,
     SocketModule,
     LoggerModule,
     UtilsModule,
