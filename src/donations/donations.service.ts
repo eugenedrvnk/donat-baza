@@ -9,16 +9,7 @@ export class DonationsService {
     private prisma: PrismaService,
   ) { }
 
-  async create(data: CreateDonationDto): Promise<DonationEntity | void> {
-
-    try {
-      const donation = await this.prisma.donation.create({ data });
-      return donation
-    } catch (err) {
-    throw err;
-    }
-    // return this.prisma.donation.create({data});
+  async create(data: CreateDonationDto): Promise<DonationEntity> {
+    return this.prisma.donation.create({ data });
   }
-
-
 }

@@ -5,16 +5,14 @@ import * as crypto from 'crypto';
 
 import { SettingsService } from 'src/settings/settings.types';
 import { UrlUtils } from 'src/utils/url.types';
+import { DonationEntity } from './donations.entity';
 import { DonationsService } from './donations.service';
 
-type GetRedirectUrl = (params: {
-  amount: number;
-  currency: string;
-  message: string;
-  recipientId: number;
-  senderName: string;
-  callbackUrlPath: string;
-}) => Promise<string>;
+type GetRedirectUrl = (
+  params: {
+    donation: DonationEntity,
+    callbackUrlPath: string
+  }) => Promise<string>;
 
 @Injectable()
 export class FondyPaymentsService {
@@ -30,34 +28,16 @@ export class FondyPaymentsService {
   })
 
   getRedirectUrl: GetRedirectUrl = async (
-    {
-      amount,
-      currency,
-      message,
-      recipientId,
-      senderName,
-      callbackUrlPath,
-    }) => {
-      const donation = this.donationsService.create({
-        amount,
-        currency,
-        message,
-        recipientId,
-        senderName,
-        paymentSystem: 'fondy',
-      })
-    
-      const requestData = {
+    { donation: { id, amount, currency, message, }, callbackUrlPath }) => {
+
+    const requestData = {
       order_id: crypto.randomBytes(64).toString('hex'),
       order_desc: message,
       currency,
       amount,
       response_url: this.urlUtils.buildUrl({
         url: `${this.settingsService.backAppUrl}/${callbackUrlPath}`,
-        query: {
-          recipientId,
-          senderName,
-        }
+        query: {}
       }),
     }
 

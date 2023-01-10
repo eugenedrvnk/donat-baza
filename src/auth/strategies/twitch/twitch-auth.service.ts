@@ -50,9 +50,7 @@ export class TwitchAuthService {
 
   public authenticate = async (code: string): Promise<UserEntity> => {
     const { accessToken, refreshToken, profile } = await this.getDataByOauthCode(code);
-    console.log(profile);
     const user = await this.usersService.findFirst({ oauthProviders: { profileId: profile.id } });
-    console.log(user);
     if (user) return user;
 
     return this.usersService.createWithOauth({
